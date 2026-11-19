@@ -1,0 +1,11 @@
+.auth-page.login { --accent:#dc2626; --input-bg:#eef2ff; --input-border:transparent; }
+.auth-page.login .auth-wrap { max-width:390px; padding-top:24px; }
+.auth-page.login .lock-badge { width:44px; height:44px; margin-bottom:12px; color:#dc2626; font-size:19px; }
+.auth-page.login .auth-card { padding:20px; border-radius:12px; box-shadow:0 8px 22px rgba(25,42,79,.07); }
+.auth-page.login .field { margin-bottom:15px; }
+.auth-page.login .btn-primary { box-shadow:0 5px 12px rgba(220,38,38,.2); }
+.auth-page.login .switch { color:#525d72; }
+
+.auth-page.login .verify-hint { margin:0 0 14px; padding:10px 12px; border-radius:8px; background:#fff7ed; color:#9a3412; font-size:13px; line-height:1.5; }
+.auth-page.login .verify-hint p { margin:0; }
+.auth-page.login .verify-hint button { display:block; margin-top:7px; padding:0; border:0; background:transparent; color:#b91c1c; font:inherit; font-weight:600; text-decoration:underline; cursor:pointer; }

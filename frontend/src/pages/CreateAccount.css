@@ -1,0 +1,12 @@
+.auth-page.signup { --accent:#2563eb; --input-bg:#fff; --input-border:#e2e8f0; }
+.auth-page.signup .btn-google { border-color:#e2e8f0; }
+.auth-page.signup .auth-wrap { max-width:360px; padding-top:78px; }
+.auth-page.signup .auth-card { padding:22px 20px; border-radius:12px; box-shadow:0 8px 22px rgba(25,42,79,.07); }
+.auth-page.signup .auth-title { font-size:22px; }
+.auth-page.signup .auth-sub { margin:5px 0 22px; }
+.auth-page.signup .field { margin-bottom:14px; }
+.auth-page.signup .btn-primary { box-shadow:0 5px 12px rgba(37,99,235,.18); }
+.auth-page.signup .switch { margin-bottom:0; }
+@media(max-width:560px) {
+  .auth-page.signup .auth-wrap { padding-top:56px; }
+}

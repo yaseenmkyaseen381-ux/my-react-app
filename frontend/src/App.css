@@ -1,0 +1,117 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Inter, system-ui, sans-serif; background: #f5f7ff; color: #0f172a; }
+header.site-header, header.auth-header { background-color: #fff; }
+a { color: inherit; }
+.header-edit-profile { display: inline-flex; align-items: center; color: #1557d8; font-size: 11px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.profile-menu-wrap { display:inline-flex; align-items:center; }
+.profile-menu-trigger .account-avatar { overflow:hidden; }
+.account-avatar img { width:100%; height:100%; object-fit:cover; }
+.profile-menu-trigger { padding:0; border:0; background:transparent; cursor:pointer; }
+.profile-menu-backdrop { position:fixed; z-index:80; inset:0; width:100%; height:100%; border:0; background:rgba(22,30,43,.20); cursor:default; }
+.profile-menu-dialog { position:fixed; z-index:81; top:76px; left:14px; width:max-content; max-width:calc(100vw - 28px); padding:0; border:1px solid #e3e7e8; background:rgba(255,255,255,.97); box-shadow:0 12px 28px rgba(22,30,43,.12); color:#344154; animation:profile-menu-in .16s ease-out; }
+.profile-menu-dialog h2 { margin:0; padding:16px 18px 13px; border-bottom:1px solid #e9ecec; color:#626c7a; font-size:10px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; white-space:nowrap; }
+.profile-menu-options { display:grid; }
+.profile-menu-options>a,.profile-menu-options>button { display:flex; align-items:center; width:100%; min-height:52px; padding:0 18px; border:0; border-bottom:1px solid #eceeee; background:transparent; color:#364456; font-size:14px; font-weight:500; text-align:left; text-decoration:none; transition:background .15s ease; }
+.profile-menu-options>a:hover,.profile-menu-options>button:hover { background:#f6f7f7; }
+.profile-menu-options>button { border-bottom:0; }
+.profile-menu-options>a:focus-visible,.profile-menu-options>button:focus-visible { outline:2px solid #8ba4d5; outline-offset:-3px; }
+@keyframes profile-menu-in { from { opacity:0; transform:translateY(-5px); } to { opacity:1; transform:translateY(0); } }
+@media (max-width:560px) { .profile-menu-dialog h2,.profile-menu-options>a,.profile-menu-options>button { padding-left:18px; padding-right:18px; } }
+.bag-glyph { display: grid; width: 21px; height: 21px; place-items: center; }
+.bag-glyph svg { display: block; width: 21px; height: 21px; }
+.wishlist-button { display: inline-grid; width: 34px; height: 34px; flex: 0 0 34px; place-items: center; border-radius: 50%; background: #fff0f2; color: #c51c35; }
+.wishlist-button svg { display: block; width: 19px; height: 19px; }
+.wishlist-button:hover { background: #ffe4e8; color: #aa1730; }
+.cart-action-icon { display: inline-block; width: 16px; height: 16px; flex: 0 0 16px; vertical-align: middle; }
+.site-header .searchbox {
+  position: relative;
+  display: flex;
+  min-width: 0;
+}
+.site-header .searchbox .search-icon { position: absolute; left: 12px; top: 50%; display: grid; width: 17px; height: 17px; transform: translateY(-50%); place-items: center; color: #718098; pointer-events: none; }
+.site-header .searchbox .search-icon svg { display: block; width: 17px; height: 17px; }
+.site-header .searchbox input { min-width: 0; width: 100%; padding: 0 0 0 27px !important; }
+.site-header .header-search { display:flex; flex:0 0 auto; height:36px; min-width:36px; padding:0; gap:0; overflow:hidden; transition:width .18s ease; }
+.site-header .header-search.is-closed { width:36px; border-color:transparent; background:transparent; box-shadow:none; }
+.site-header .header-search.is-open { position:relative; width:min(230px,38vw); padding:0 10px 0 0; gap:0; }
+.site-header .header-search .search-toggle { display:grid; width:36px; height:36px; flex:0 0 36px; place-items:center; padding:0; border:0; border-radius:50%; background:transparent; color:#718098; cursor:pointer; }
+.site-header .header-search.is-open .search-toggle { position:absolute; top:0; left:0; z-index:1; }
+.site-header .header-search .search-toggle:hover { background:#eef2ff; color:#1557d8; }
+.site-header .header-search .search-toggle svg { display:block; width:20px; height:20px; }
+.site-header .header-search input { flex:1 1 auto; min-width:0; width:auto; padding:0 0 0 40px !important; }
+
+/* Shared customer navigation rail, used across catalog, cart, and account pages. */
+@media (min-width: 851px) {
+  .customer-header nav {
+    position: fixed;
+    top: 66px;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+    display: flex;
+    width: 190px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px;
+    padding: 24px 14px;
+    border-right: 1px solid #e3e9f2;
+    background: rgba(245, 247, 251, .96);
+    box-shadow: 5px 0 20px rgba(29, 48, 83, .035);
+  }
+  .customer-header nav a {
+    display: flex;
+    align-items: center;
+    min-height: 42px;
+    padding: 0 13px;
+    border-radius: 8px;
+    color: #42516a;
+    font-size: 12px;
+  }
+  .customer-header nav a:hover,
+  .customer-header nav a:focus-visible {
+    background: #eff4ff;
+    color: #1557d8;
+  }
+  body:has(.customer-header) .catalog-page {
+    width: min(1190px, calc(100vw - 230px));
+    margin-left: max(214px, calc(190px + (100vw - 190px - 1190px) / 2));
+    margin-right: 16px;
+  }
+  body:has(.customer-header) .profile-page {
+    width: min(1220px, calc(100vw - 230px));
+    max-width: 1220px;
+    margin-left: max(214px, calc(190px + (100vw - 190px - 1220px) / 2));
+    margin-right: 16px;
+  }
+  body:has(.customer-header) .admin-page {
+    width: min(1220px, calc(100vw - 230px));
+    max-width: 1220px;
+    margin-left: max(214px, calc(190px + (100vw - 190px - 1220px) / 2));
+    margin-right: 16px;
+  }
+}
+@media (max-width: 850px) {
+  .customer-header {
+    height: auto;
+    min-height: 58px;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    padding: 8px 14px;
+  }
+  .customer-header nav {
+    order: 3;
+    display: flex;
+    flex: 0 0 100%;
+    gap: 18px;
+    overflow-x: auto;
+    padding: 0 0 3px;
+    scrollbar-width: none;
+    font-size: 11px;
+  }
+  .customer-header nav::-webkit-scrollbar { display: none; }
+  .customer-header nav a { flex: 0 0 auto; padding: 4px 0; white-space: nowrap; }
+  .customer-header .searchbox { order: 2; min-width: 36px; }
+  .customer-header .header-actions { order: 1; margin-left: auto; }
+}
+@media (max-width: 560px) {
+}
