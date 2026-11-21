@@ -18,7 +18,6 @@ export default function GoogleAuthButton({ mode = "login" }) {
 
   useEffect(() => {
     if (!clientId) {
-      setError("Google sign-in needs VITE_GOOGLE_CLIENT_ID in frontend/.env and GOOGLE_CLIENT_ID in backend/.env.");
       return undefined;
     }
 
@@ -75,6 +74,8 @@ export default function GoogleAuthButton({ mode = "login" }) {
       buttonRef.current?.replaceChildren();
     };
   }, [clientId, navigate, mode]);
+
+  if (!clientId) return null;
 
   return <div className="google-auth-wrap">
     {loading ? <div className="google-loading" role="status">Signing in with Google…</div> : <div className="google-signin-slot" ref={buttonRef} />}
