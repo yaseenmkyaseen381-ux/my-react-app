@@ -16,7 +16,10 @@ try {
     { $set: { role: "admin" } },
     { new: true },
   );
-  if (!user) throw new Error("No active, verified account exists for that email. Sign up, verify the email, and try again.");
+  if (!user)
+    throw new Error(
+      "No active, verified account exists for that email. Sign up, verify the email, and try again.",
+    );
   console.log(`Administrator access enabled for ${user.email}.`);
 } catch (error) {
   console.error(error.message);

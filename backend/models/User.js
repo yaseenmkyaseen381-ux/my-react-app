@@ -1,25 +1,38 @@
 import mongoose from "mongoose";
 
-const addressSchema = new mongoose.Schema({
-  label: { type: String, trim: true, default: "Home" },
-  fullName: { type: String, required: true, trim: true },
-  phone: { type: String, required: true, trim: true },
-  line1: { type: String, required: true, trim: true },
-  line2: { type: String, trim: true, default: "" },
-  city: { type: String, required: true, trim: true },
-  state: { type: String, required: true, trim: true },
-  postalCode: { type: String, required: true, trim: true },
-  country: { type: String, required: true, trim: true, default: "India" },
-  isDefault: { type: Boolean, default: false },
-}, { timestamps: true });
+const addressSchema = new mongoose.Schema(
+  {
+    label: { type: String, trim: true, default: "Home" },
+    fullName: { type: String, required: true, trim: true },
+    phone: { type: String, required: true, trim: true },
+    line1: { type: String, required: true, trim: true },
+    line2: { type: String, trim: true, default: "" },
+    city: { type: String, required: true, trim: true },
+    state: { type: String, required: true, trim: true },
+    postalCode: { type: String, required: true, trim: true },
+    country: { type: String, required: true, trim: true, default: "India" },
+    isDefault: { type: Boolean, default: false },
+  },
+  { timestamps: true },
+);
 
 const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
-    email: { type: String, required: true, unique: true, lowercase: true, trim: true },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
     password: { type: String, required: false },
     googleId: { type: String, unique: true, sparse: true, select: false },
-    authProvider: { type: String, enum: ["local", "google", "both"], default: "local" },
+    authProvider: {
+      type: String,
+      enum: ["local", "google", "both"],
+      default: "local",
+    },
     role: { type: String, enum: ["user", "admin"], default: "user" },
     blocked: { type: Boolean, default: false, index: true },
     emailVerified: { type: Boolean, default: false },
@@ -43,7 +56,7 @@ const userSchema = new mongoose.Schema(
     resetOtpAttempts: { type: Number, default: 0, select: false },
     otpLastSentAt: { type: Date, select: false },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model("User", userSchema);

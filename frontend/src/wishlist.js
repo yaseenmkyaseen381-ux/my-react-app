@@ -6,7 +6,9 @@ export const WISHLIST_KEY = "mobix-wishlist";
 export function readWishlist() {
   try {
     const value = JSON.parse(localStorage.getItem(WISHLIST_KEY) || "[]");
-    return Array.isArray(value) ? value.filter((id) => typeof id === "string") : [];
+    return Array.isArray(value)
+      ? value.filter((id) => typeof id === "string")
+      : [];
   } catch {
     localStorage.removeItem(WISHLIST_KEY);
     return [];
@@ -33,11 +35,14 @@ export async function toggleWishlist(productId) {
     if (removing) await removeWishlistItem(productId);
     else await addWishlistItem(productId);
   }
-  return writeWishlist(removing ? current.filter((id) => id !== productId) : [...current, productId]);
+  return writeWishlist(
+    removing
+      ? current.filter((id) => id !== productId)
+      : [...current, productId],
+  );
 }
 
 export async function removeFromWishlist(productId) {
   if (getSessionToken("user")) await removeWishlistItem(productId);
   return writeWishlist(readWishlist().filter((id) => id !== productId));
 }
-

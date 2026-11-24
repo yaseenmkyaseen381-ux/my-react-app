@@ -7,6 +7,7 @@ const links = [
   ["products", "Products", "/admin/products"],
   ["inventory", "Inventory", "/admin/inventory"],
   ["categories", "Categories", "/admin/categories"],
+  ["coupons", "Coupons", "/admin/coupons"],
   ["orders", "Orders", "/admin/orders"],
   ["users", "Users", "/admin/users"],
   ["reports", "Reports", "/admin/reports"],
@@ -22,10 +23,23 @@ export default function AdminNavigation({ active, onLogout }) {
       .catch(() => {});
   }, []);
 
-  return <>
-    {links.map(([id, title, to]) => <Link key={id} className={`${id === "orders" ? "admin-nav-orders" : ""} ${active === id ? "active" : ""}`.trim()} to={to}>
-      <span>{title}</span>{id === "orders" && orderCount > 0 && <span className="admin-nav-count">{orderCount}</span>}
-    </Link>)}
-    <button type="button" className="admin-nav-logout" onClick={onLogout}>Log out</button>
-  </>;
+  return (
+    <>
+      {links.map(([id, title, to]) => (
+        <Link
+          key={id}
+          className={`${id === "orders" ? "admin-nav-orders" : ""} ${active === id ? "active" : ""}`.trim()}
+          to={to}
+        >
+          <span>{title}</span>
+          {id === "orders" && orderCount > 0 && (
+            <span className="admin-nav-count">{orderCount}</span>
+          )}
+        </Link>
+      ))}
+      <button type="button" className="admin-nav-logout" onClick={onLogout}>
+        Log out
+      </button>
+    </>
+  );
 }

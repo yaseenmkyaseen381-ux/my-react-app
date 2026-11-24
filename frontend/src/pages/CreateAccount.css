@@ -1,12 +1,71 @@
-.auth-page.signup { --accent:#2563eb; --input-bg:#fff; --input-border:#e2e8f0; }
-.auth-page.signup .btn-google { border-color:#e2e8f0; }
-.auth-page.signup .auth-wrap { max-width:360px; padding-top:78px; }
-.auth-page.signup .auth-card { padding:22px 20px; border-radius:12px; box-shadow:0 8px 22px rgba(25,42,79,.07); }
-.auth-page.signup .auth-title { font-size:22px; }
-.auth-page.signup .auth-sub { margin:5px 0 22px; }
-.auth-page.signup .field { margin-bottom:14px; }
-.auth-page.signup .btn-primary { box-shadow:0 5px 12px rgba(37,99,235,.18); }
-.auth-page.signup .switch { margin-bottom:0; }
-@media(max-width:560px) {
-  .auth-page.signup .auth-wrap { padding-top:56px; }
+.auth-page.signup.create-account-page {
+  --accent: #125dff;
+  --input-bg: #171b25;
+  --input-border: #343b49;
+  min-height: 100vh;
+  background: #fff;
+  color: #0f172a;
+}
+.auth-page.signup.create-account-page .auth-header {
+  background: #fff;
+  border-color: #e5e7eb;
+}
+.auth-page.signup.create-account-page .back {
+  color: #172744;
+}
+.auth-page.signup.create-account-page .auth-card {
+  border: 1px solid #292f3b;
+  background: #05070c;
+  color: #f8fafc;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.16);
+}
+.auth-page.signup.create-account-page .auth-title,
+.auth-page.signup.create-account-page .field label {
+  color: #f8fafc;
+}
+.auth-page.signup.create-account-page .auth-sub,
+.auth-page.signup.create-account-page .switch {
+  color: #aab4c5;
+}
+.auth-page.signup.create-account-page .switch a {
+  color: #d0eb06;
+}
+.auth-page.signup.create-account-page .input-box input {
+  color: #f8fafc;
+}
+.auth-page.signup.create-account-page .input-box input::placeholder {
+  color: #a3adbd;
+  opacity: 1;
+}
+.auth-page.signup .btn-google {
+  border-color: #013ea8;
+}
+.auth-page.signup .auth-wrap {
+  max-width: 360px;
+  padding-top: 78px;
+}
+.auth-page.signup .auth-card {
+  padding: 22px 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(237, 238, 241, 0.879);
+}
+.auth-page.signup .auth-title {
+  font-size: 22px;
+}
+.auth-page.signup .auth-sub {
+  margin: 5px 0 22px;
+}
+.auth-page.signup .field {
+  margin-bottom: 14px;
+}
+.auth-page.signup .btn-primary {
+  box-shadow: 0 5px 12px rgba(37, 99, 235, 0.18);
+}
+.auth-page.signup .switch {
+  margin-bottom: 0;
+}
+@media (max-width: 560px) {
+  .auth-page.signup .auth-wrap {
+    padding-top: 56px;
+  }
 }

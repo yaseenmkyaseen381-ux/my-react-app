@@ -1,0 +1,20 @@
+frontend/src\pages\AdminDashboard.jsx:146:          <span className="brand-icon">M</span>
+frontend/src\pages\AdminInventory.jsx:116:          <span className="brand-icon">M</span>
+frontend/src\pages\AdminLogin.jsx:39:          <span className="auth-brand-icon" aria-hidden="true" />
+frontend/src\pages\AdminOrders.jsx:99:          <span className="brand-icon">M</span>
+frontend/src\pages\AdminCategories.jsx:99:          <span className="brand-icon">M</span>
+frontend/src\pages\AdminProducts.jsx:322:          <span className="brand-icon">M</span>
+frontend/src\components\SiteHeader.jsx:48:        <span className="brand-icon">M</span>
+frontend/src\pages\AdminProfile.jsx:128:          <span className="brand-icon">M</span>
+frontend/src\pages\AdminRecovery.jsx:70:          <span className="brand-icon">M</span>
+frontend/src\pages\AdminReports.jsx:156:          <span className="brand-icon">M</span>
+frontend/src\pages\AdminReviews.jsx:93:          <span className="brand-icon">M</span>
+frontend/src\pages\AdminUsers.jsx:212:          <span className="brand-icon">M</span>
+frontend/src\pages\CreateAccount.jsx:56:          <span className="auth-brand-icon">M</span>
+frontend/src\pages\ForgotPassword.jsx:81:          <span className="auth-brand-icon">M</span>
+frontend/src\pages\Home.jsx:203:          <span className="brand-icon">M</span>
+frontend/src\pages\Home.jsx:695:            <span className="brand-icon">M</span>
+frontend/src\pages\Login.jsx:92:              <span className="auth-brand-icon" aria-hidden="true" />
+frontend/src\pages\NotFound.jsx:9:          <span className="auth-brand-icon" aria-hidden="true" />
+frontend/src\pages\VerifyEmail.jsx:70:            <span className="auth-brand-icon" aria-hidden="true" />
+frontend/src\pages\VerifyEmail.jsx:90:          <span className="auth-brand-icon" aria-hidden="true" />

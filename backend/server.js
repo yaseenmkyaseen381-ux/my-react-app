@@ -13,11 +13,16 @@ import seedCatalog from "./data/seedCatalog.js";
 
 const app = express();
 if (!process.env.MONGO_URI || !process.env.JWT_SECRET) {
-  console.error("MONGO_URI and JWT_SECRET must be configured before the API can start.");
+  console.error(
+    "MONGO_URI and JWT_SECRET must be configured before the API can start.",
+  );
   process.exit(1);
 }
 
-const allowedOrigins = (process.env.CLIENT_URL || "http://localhost:5173").split(",").map((value) => value.trim()).filter(Boolean);
+const allowedOrigins = (process.env.CLIENT_URL || "http://localhost:5173")
+  .split(",")
+  .map((value) => value.trim())
+  .filter(Boolean);
 const port = Number.parseInt(process.env.PORT || "5000", 10);
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json({ limit: "16mb" }));
@@ -38,10 +43,15 @@ app.use((err, _req, res, _next) => {
 
 async function startServer() {
   try {
-    await mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 5000 });
+    await mongoose.connect(process.env.MONGO_URI, {
+      serverSelectionTimeoutMS: 5000,
+    });
     await seedCatalog();
     // Existing accounts created before email verification was introduced stay valid.
-    await User.updateMany({ emailVerified: { $exists: false } }, { $set: { emailVerified: true } });
+    await User.updateMany(
+      { emailVerified: { $exists: false } },
+      { $set: { emailVerified: true } },
+    );
     console.log("MongoDB connected");
 
     await new Promise((resolve, reject) => {
@@ -51,9 +61,13 @@ async function startServer() {
     console.log(`API running on port ${port}`);
   } catch (error) {
     if (error.message.includes("ECONNREFUSED")) {
-      console.error("MongoDB refused the connection. Start the MongoDB Server service or set MONGO_URI to a reachable database.");
+      console.error(
+        "MongoDB refused the connection. Start the MongoDB Server service or set MONGO_URI to a reachable database.",
+      );
     } else if (error.code === "EADDRINUSE") {
-      console.error(`Port ${port} is already in use. Stop the other process or set a different PORT in backend/.env.`);
+      console.error(
+        `Port ${port} is already in use. Stop the other process or set a different PORT in backend/.env.`,
+      );
     } else {
       console.error("Backend startup failed:", error.message);
     }
