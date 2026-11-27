@@ -13,10 +13,6 @@ export default function AdminLogin() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const switchToCustomer = () => {
-    navigate("/user", { replace: true });
-  };
-
   const submit = async (event) => {
     event.preventDefault();
     setError("");
@@ -98,12 +94,6 @@ export default function AdminLogin() {
             {loading ? "Signing in…" : "Sign in to admin"}
           </button>
         </form>
-        <p className="switch">
-          Customer account?{" "}
-          <Link to="/user" onClick={switchToCustomer}>
-            Sign in as a customer
-          </Link>
-        </p>
       </main>
     </div>
   );
