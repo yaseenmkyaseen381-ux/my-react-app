@@ -230,6 +230,10 @@ export default function Orders() {
                   <section className="receipt-return-notice" role="status">
                     <b>Return request: {order.returnRequest.status}</b>
                     <p>Reason: {order.returnRequest.reason}</p>
+                    {order.returnRequest.status === "accepted" &&
+                      order.refundStatus === "refunded" && (
+                        <p>Your refund was added to your MOBIX wallet.</p>
+                      )}
                   </section>
                 )}
               {order.returnRequest?.status === "completed" && (

@@ -100,7 +100,10 @@ async function refundWalletOrder(order, session, note) {
     { $setOnInsert: { balancePaise: 0, transactions: [] } },
     { new: true, upsert: true, session, setDefaultsOnInsert: true },
   );
-  if (!wallet.transactions.some((entry) => entry.reference === reference)) {
+  const alreadyCredited = wallet.transactions.some(
+    (entry) => entry.reference === reference,
+  );
+  if (!alreadyCredited) {
     wallet.balancePaise += amount(order.total);
     wallet.transactions.push({
       type: "refund",
@@ -116,7 +119,12 @@ async function refundWalletOrder(order, session, note) {
   }
   order.paymentStatus = "refunded";
   order.refundStatus = "refunded";
-  order.paymentHistory.push({ event: "wallet_refund", reference, note });
+  if (
+    !order.paymentHistory.some(
+      (entry) => entry.event === "wallet_refund" && entry.reference === reference,
+    )
+  )
+    order.paymentHistory.push({ event: "wallet_refund", reference, note });
 }
 
 async function withTransaction(work) {
@@ -904,7 +912,11 @@ router.patch("/:id/return-review", adminOnly, async (req, res) => {
     const order = await Order.findById(req.params.id);
     if (!order) return res.status(404).json({ message: "Order not found." });
     const fromStatus = decision === "completed" ? "accepted" : "requested";
-    if (order.returnRequest.status !== fromStatus)
+    const pendingAcceptedRefund =
+      decision === "accepted" &&
+      order.returnRequest.status === "accepted" &&
+      order.refundStatus !== "refunded";
+    if (order.returnRequest.status !== fromStatus && !pendingAcceptedRefund)
       return res
         .status(409)
         .json({
@@ -913,6 +925,31 @@ router.patch("/:id/return-review", adminOnly, async (req, res) => {
               ? "Only an accepted return can be marked as received."
               : "Pending return request not found.",
         });
+    if (decision === "accepted") {
+      const updated = await withTransaction(async (session) => {
+        const current = await Order.findOne({
+          _id: order._id,
+          "returnRequest.status": { $in: ["requested", "accepted"] },
+        }).session(session);
+        if (!current || current.refundStatus === "refunded")
+          throw Object.assign(
+            new Error(
+              "The return request changed before it could be accepted. Refresh and try again.",
+            ),
+            { status: 409 },
+          );
+        current.returnRequest.status = "accepted";
+        current.returnRequest.reviewedAt = new Date();
+        await refundWalletOrder(
+          current,
+          session,
+          "Wallet balance returned after the return request was accepted.",
+        );
+        await current.save({ session });
+        return current;
+      });
+      return res.json({ order: updated });
+    }
     if (decision === "completed") {
       const updated = await withTransaction(async (session) => {
         const current = await Order.findById(order._id).session(session);

@@ -279,10 +279,24 @@ export default function AdminOrders() {
                     )}
                     {o.returnRequest?.status === "accepted" && (
                       <p>
-                        Return accepted
+                        {o.refundStatus === "refunded"
+                          ? "Return accepted · refund credited to MOBIX wallet"
+                          : "Return accepted · wallet refund pending"}
                         <br />
+                        {o.refundStatus !== "refunded" && (
+                          <>
+                            <button
+                              onClick={() =>
+                                act(() => reviewReturn(o._id, "accepted"))
+                              }
+                            >
+                              Credit refund to wallet
+                            </button>
+                            <br />
+                          </>
+                        )}
                         <button onClick={() => validateReturn(o)}>
-                          Validate return & restock
+                          Mark return received & restock
                         </button>
                       </p>
                     )}
